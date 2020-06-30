@@ -1,0 +1,110 @@
+* Budgeit
+
+Control your budget via SMS
+
+* NB :noexport:
+
+** Functionality/Usage
+   - all texts in conversation saved as conversation messages
+
+   - SEND :: 'signup' to <service_number>
+     - APP :: create conversation
+     - RESPOND :: 'Hello! Would you like to create a Budgeit account?'
+       - SEND :: 'yes'
+         - RESPOND :: 'Great! What is your name?'
+           - SEND :: 'My Name'
+         - RESPOND :: 'Please add your email address'
+           - SEND :: 'user@email.com'
+           - APP :: create user account with
+             - name
+             - phone number
+           - APP :: associate conversation with user account
+         - RESPOND :: 'Your user account has been created! <insert help for next steps>'
+       - SEND :: 'no'
+   - SEND :: 'create account'
+     - FULL OPTION :: 'create account checking ubt 3000'
+       - command, type, name, balance
+     - RESPOND :: 'What type of account would you like to create? (checking/savings)'
+       - SEND :: 'checking'
+     - RESPOND :: 'What is the name for your checking account?'
+       - SEND :: 'ubt'
+     - RESPOND :: 'What is the current balance?'
+       - SEND :: '3000'
+   - SEND :: 'adjust balance'
+   - SEND :: 'credit'
+     - FULL(no date) :: 'credit 123.45'
+       - defaults to today
+       - FULL :: 'credit 123.45 10112022'
+   - SEND :: 'debit'
+   - SEND :: 'balance'
+     - defaults to current balance
+     - FULL :: 'balance 12222020'
+
+** DB Relations
+
+*** Conversation
+
+    - HAS :: one [[User]]
+    - HAS :: many [[Message]]s
+
+    - ID :: Integer
+    - USER_NUMBER :: String(phone_number, '4021234567')
+    - SERVICE_NUMBER :: String(phone_number, '4021234567')
+
+*** User   
+
+    - HAS :: one [[Account]]
+    - BELONGS TO :: [[Conversation]]
+    
+    - ID :: Integer
+    - NAME :: String
+    - PHONE_NUMBER :: String(phone_number, '4021234567')
+    - EMAIL :: String
+    - CONVERSATION_ID :: Integer
+
+*** Message    
+
+    - BELONGS TO :: [[Conversation]]
+
+    - ID :: Integer
+    - FROM :: String(user, service)
+    - BODY :: Text
+    - CONVERSATION_ID :: Integer
+
+*** Account
+
+    - HAS :: many [[Transaction]]s
+    - BELONGS TO :: [[User]]
+
+    - ID :: Integer
+    - ACCOUNT_TYPE :: String('checking', 'savings')
+    - NAME :: String
+    - CURRENT_BALANCE :: Integer
+    - USER_ID :: Integer
+
+*** Transaction
+
+    - BELONGS TO :: [[Account]]
+
+    - ID :: Integer
+    - TRANSACTION_TYPE :: String('debit', 'credit')
+    - AMOUNT :: Integer
+    - DESCRIPTION :: Text(default '<type> transaction')
+    - CATEGORY :: String
+    - ACCOUNT_ID :: Integer(foreign key)
+
+** Libraries
+
+   [[./Gemfile]]
+
+*** twilio-ruby
+
+**** twilio configuration
+
+*** dot-env
+** TODO
+
+   - set database user/passwords
+   - authenticate users
+   - set up routes
+   - integrate twilio
