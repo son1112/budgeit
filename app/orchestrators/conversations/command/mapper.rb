@@ -8,7 +8,8 @@ module Conversations
           # 'account': Conversations::Command::Functions::Account,
           # 'balance': Conversations::Command::Account::Functions::Balance,
           # 'credit': Conversations::Command::Account::Functions::Credit,
-          # 'debit': Conversations::Command::Account::Functions::Debit
+          # 'debit': Conversations::Command::Account::Functions::Debit,
+          # 'report': Conversations::Command::Account::Functions::Report
         }[command_item.to_sym]
       end
     end

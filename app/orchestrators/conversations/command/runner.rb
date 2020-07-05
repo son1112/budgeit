@@ -17,6 +17,8 @@ module Conversations
         command.perform_using(arguments, @conversation)
       end
 
+      private
+
       def command
         @command[:command]
       end

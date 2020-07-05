@@ -15,6 +15,8 @@ module Conversations
       Conversations::Command::Runner.perform_using(command, @conversation)
     end
 
+    private
+
     def command
       Conversations::Command::Builder.build(@params, @conversation)
     end

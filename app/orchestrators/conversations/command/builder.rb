@@ -37,11 +37,11 @@ module Conversations
       end
 
       def body
-        @params["Body"]
+        @params['Body']
       end
 
       def user_number
-        @params["From"]
+        @params['From']
       end
 
       def record_message

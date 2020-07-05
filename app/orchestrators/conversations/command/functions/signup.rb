@@ -22,6 +22,8 @@ module Conversations
           ## 
         end
 
+        private
+
         def message
           'Hello! Would you like to create a Budgeit account?'
         end
