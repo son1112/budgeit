@@ -48,3 +48,5 @@ postcss.config.js
 
 .DS_STORE
 *.keep
+# Ignore application configuration
+/config/application.yml

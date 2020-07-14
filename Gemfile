@@ -13,8 +13,16 @@ gem 'jbuilder', '~> 2.7'
 gem 'bootsnap', '>= 1.4.2', require: false
 
 gem 'dotenv-rails', groups: [:development, :test]
-
 gem 'twilio-ruby', '~> 5.38.0'
+
+gem 'figaro'
+
+gem 'capistrano'
+gem 'capistrano-bundler'
+gem 'capistrano-passenger', '>= 0.1.1'
+gem 'capistrano-rails'
+gem 'capistrano-rvm'
+gem 'capistrano-figaro-yml', '~> 1.0.2'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

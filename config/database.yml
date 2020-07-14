@@ -23,3 +23,7 @@ test:
 production:
   <<: *default
   database: db/budgeit_sms_production.sqlite3
+  username: budgeit
+  password: <%= ENV['BUDGEIT_DATABASE_PASSWORD'] %>
+  host: <%= ENV['BUDGEIT_DATABASE_HOST'] %>
+  port: <%= ENV['BUDGEIT_DATABASE_PORT'] %>
